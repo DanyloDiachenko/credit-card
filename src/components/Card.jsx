@@ -55,11 +55,11 @@ export const Card = (props) => {
                 <div>
                     <img src='images/card-logo.svg' alt='card-logo' />
                 </div>
-                <CardNumber>{props.cardNumber}0000000000</CardNumber>
+                <CardNumber>{props.cardNumber}</CardNumber>
                 <CardDateDate>
                     <div>
-                        <CardName>{props.name}Jane </CardName>
-                        <CardName>{props.surname}Jane</CardName>
+                        <CardName>{props.name} </CardName>
+                        <CardName>{props.surname}</CardName>
                     </div>
                     <CardDate>
                         <CardSince>{props.cardSince}01</CardSince>/<CardTo>{props.cardTo}29</CardTo>
@@ -67,7 +67,7 @@ export const Card = (props) => {
                 </CardDateDate>
             </CardFront>
             <CardBack>
-                <CardCVC>{props.cardCVC}</CardCVC>
+                <CardCVC>{props.cardCVC} 000</CardCVC>
             </CardBack>
         </Wrapper>
     );
