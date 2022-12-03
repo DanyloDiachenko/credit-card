@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     width: 400px;
-    margin-left: 8%;
+    margin-left: 15%;
 `;
 
 const CardFront = styled.div`
