@@ -2,17 +2,15 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     width: 400px;
-    margin-left: 100px;
+    margin-left: 8%;
 `;
 
 const CardFront = styled.div`
     background-image: url(/images/bg-card-front.png);
-    object-fit: contain;
     width: 449px;
     height: 247px;
     background-repeat: no-repeat;
     padding: 20px 35px;
-    border: 1px solid black;
 `;
 
 const CardNumber = styled.div`
@@ -38,7 +36,16 @@ const CardTo = styled.span``;
 
 
 const CardBack = styled.div`
+    background-image: url(/images/bg-card-back.png);
+    width: 449px;
+    height: 247px;
+    background-repeat: no-repeat;
+    margin: 50px 0 0 20%;
+`;
 
+const CardCVC = styled.div`
+    padding: 108px 0 0 360px;
+    letter-spacing: 1.5px;
 `;
 
 export const Card = (props) => {
@@ -56,7 +63,9 @@ export const Card = (props) => {
                     </CardDate>
                 </CardDateDate>
             </CardFront>
-            <CardBack></CardBack>
+            <CardBack>
+                <CardCVC>000</CardCVC>
+            </CardBack>
         </Wrapper>
     );
 };
