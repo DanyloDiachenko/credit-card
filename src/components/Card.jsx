@@ -62,12 +62,12 @@ export const Card = (props) => {
                         <CardName>{props.surname}</CardName>
                     </div>
                     <CardDate>
-                        <CardSince>{props.cardSince}01</CardSince>/<CardTo>{props.cardTo}29</CardTo>
+                        <CardSince>{props.cardSince}</CardSince>/<CardTo>{props.cardTo}</CardTo>
                     </CardDate>
                 </CardDateDate>
             </CardFront>
             <CardBack>
-                <CardCVC>{props.cardCVC} 000</CardCVC>
+                <CardCVC>{props.cardCVC}</CardCVC>
             </CardBack>
         </Wrapper>
     );

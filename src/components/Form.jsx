@@ -37,7 +37,7 @@ export const Form = (props) => {
                 </div>
                 <div className='col-12 mt-4'>
                     <CardItemTitle>Card number</CardItemTitle>
-                    <CardSurNameInput />
+                    <CardSurNameInput value={props.inputCardNumber} onChange={props.setInputCardNumber} />
                 </div>
             </div>
         </Wrapper>

@@ -19,9 +19,9 @@ const RightColumn = styled.div`
 function App() {
 
   const [inputesState, setInputesState] = useState({
-    inputName: 'jane',
-    inputSurname: 'appleseed',
-    cardNumber: '0000 0000 0000 0000',
+    inputName: '',
+    inputSurname: '',
+    inputCardNumber: '',
   });
 
   return (
@@ -36,7 +36,11 @@ function App() {
         <RightColumn className='col-lg-6 col-md-12 d-flex align-items-center p-0'>
           <Form
             inputName={inputesState.inputName}
-            setInputName={(e) => setInputesState({ inputName: e.target.value })} />
+            setInputName={(e) => setInputesState({ inputName: e.target.value })}
+
+            inputSurname={inputesState.inputSurname}
+            setInputSurname={(e) => setInputesState({ inputSurname: e.target.value })}
+          />
         </RightColumn>
       </div>
     </div>
