@@ -1,3 +1,25 @@
 * {
   margin: 0;
-};
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  margin-top: 5px !important;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  outline: none;
+  padding-left: 10px;
+  font-weight: 500;
+  font-size: 18px !important;
+  cursor: pointer;
+}
+
+input::placeholder {
+  opacity: 0.5;
+}
+
+input:focus {
+  border: 2px solid hsl(249, 99%, 64%);
+  opacity: 0.8;
+}

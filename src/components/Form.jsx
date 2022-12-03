@@ -10,17 +10,35 @@ const Wrapper = styled.form`
 
 const CardItemTitle = styled.div`
     text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 14px;
 `;
 
-const CardNameLabel = styled.input`
+const CardNameInput = styled.input.attrs({
+    placeholder: 'e.g. Jane'
+})``;
 
-`;
+const CardSurNameInput = styled.input.attrs({
+    placeholder: 'e.g. Appleseed',
+})``;
 
 export const Form = (props) => {
     return (
         <Wrapper className='container'>
             <div className='row'>
-                <CardItemTitle>Cardholder name</CardItemTitle>
+                <div className='col-lg-6 col-sm-12'>
+                    <CardItemTitle>Cardholder name</CardItemTitle>
+                    <CardNameInput />
+                </div>
+                <div className='col-lg-6 col-sm-12'>
+                    <CardItemTitle>Cardholder surname</CardItemTitle>
+                    <CardSurNameInput />
+                </div>
+                <div className='col-12 mt-4'>
+                    <CardItemTitle>Card number</CardItemTitle>
+                    <CardSurNameInput />
+                </div>
             </div>
         </Wrapper>
     );

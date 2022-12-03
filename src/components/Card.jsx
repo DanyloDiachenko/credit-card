@@ -53,7 +53,7 @@ export const Card = (props) => {
         <Wrapper>
             <CardFront>
                 <div>
-                    <img src='images/card-logo.svg' />
+                    <img src='images/card-logo.svg' alt='card-logo' />
                 </div>
                 <CardNumber>0000 0000 0000 0000</CardNumber>
                 <CardDateDate>
