@@ -29,11 +29,11 @@ export const Form = (props) => {
             <div className='row'>
                 <div className='col-lg-6 col-sm-12'>
                     <CardItemTitle>Cardholder name</CardItemTitle>
-                    <CardNameInput />
+                    <CardNameInput value={props.inputName} onChange={props.setInputName} />
                 </div>
                 <div className='col-lg-6 col-sm-12'>
                     <CardItemTitle>Cardholder surname</CardItemTitle>
-                    <CardSurNameInput />
+                    <CardSurNameInput value={props.inputSurname} onChange={props.setInputSurname} />
                 </div>
                 <div className='col-12 mt-4'>
                     <CardItemTitle>Card number</CardItemTitle>
