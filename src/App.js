@@ -63,7 +63,6 @@ const CardCVC = styled.div`
 
 const WrapperForm = styled.form`
     width: 449px;
-    height: 500px;
     border: 2px solid red;
     margin-right: 15%;
     color: black;
@@ -96,6 +95,25 @@ const CardCardDateToInput = styled.input.attrs({
   placeholder: 'YY',
 })``;
 
+const Button = styled.button.attrs({
+  type: 'submit'
+})`
+  width: 100%;
+  height: 50px;
+  background-color: hsl(278, 68%, 11%);
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  transition: 0.3s;
+  border: none;
+
+  &:hover {
+    background-color: hsl(279, 6%, 55%)
+  };
+`;
+
 
 const App = () => {
 
@@ -103,8 +121,9 @@ const App = () => {
     inputName: '',
     inputSurname: '',
     inputCardNumber: '',
-    inputCardDateSince: '01',
-    inputCardDateTo: '29',
+    inputCardDateSince: '',
+    inputCardDateTo: '',
+    inputCardCVC: '',
   });
 
   return (
@@ -123,12 +142,12 @@ const App = () => {
                   <CardName>{inputesState.inputSurname}</CardName>
                 </div>
                 <CardDate>
-                  <CardSince>01</CardSince>/<CardTo>29</CardTo>
+                  <CardSince>{inputesState.inputCardDateSince}</CardSince>/<CardTo>{inputesState.inputCardDateTo}</CardTo>
                 </CardDate>
               </CardDateDate>
             </CardFront>
             <CardBack>
-              <CardCVC>100</CardCVC>
+              <CardCVC>{inputesState.inputCardCVC}</CardCVC>
             </CardBack>
           </Wrapper>
         </LeftColumn>
@@ -150,15 +169,18 @@ const App = () => {
               <div className='col-6 mt-4 row'>
                 <CardItemTitle>EXP.DATE (MM/YY)</CardItemTitle>
                 <div className='col-6'>
-                  <CardCardDateSinceInput value={inputesState.inputCardNumber} onChange={(e) => setInputesState({ ...inputesState, inputCardNumber: e.target.value })} />
+                  <CardCardDateSinceInput value={inputesState.inputCardDateSince} onChange={(e) => setInputesState({ ...inputesState, inputCardDateSince: e.target.value })} />
                 </div>
                 <div className='col-6'>
-                  <CardCardDateToInput value={inputesState.inputCardNumber} onChange={(e) => setInputesState({ ...inputesState, inputCardNumber: e.target.value })} />
+                  <CardCardDateToInput value={inputesState.inputCardDateTo} onChange={(e) => setInputesState({ ...inputesState, inputCardDateTo: e.target.value })} />
                 </div>
               </div>
               <div className='col-6 mt-4'>
                 <CardItemTitle>CVC</CardItemTitle>
-                <CardSurNameInput value={inputesState.inputCardNumber} onChange={(e) => setInputesState({ ...inputesState, inputCardNumber: e.target.value })} />
+                <CardSurNameInput value={inputesState.inputCardCVC} onChange={(e) => setInputesState({ ...inputesState, inputCardCVC: e.target.value })} />
+              </div>
+              <div className='col-12 mt-5'>
+                <Button>Confirm</Button>
               </div>
             </div>
           </WrapperForm>

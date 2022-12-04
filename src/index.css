@@ -13,6 +13,11 @@ input {
   font-weight: 500;
   font-size: 18px !important;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+input:hover {
+  border: 2px solid hsl(249, 99%, 64%);
 }
 
 input::placeholder {
@@ -20,6 +25,6 @@ input::placeholder {
 }
 
 input:focus {
-  border: 2px solid hsl(249, 99%, 64%);
+  border: 2px solid hsl(278, 68%, 11%);
   opacity: 0.8;
 }
