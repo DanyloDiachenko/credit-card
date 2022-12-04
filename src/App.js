@@ -114,6 +114,27 @@ const Button = styled.button.attrs({
   };
 `;
 
+const TitleThank = styled.div`
+  font-size: 28px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-top: 20px;
+`;
+
+const Description = styled.div`
+  font-weight: 500;
+  font-size: 20px;
+  opacity: 0.6;  
+`;
+
+const TitleOperation = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+`;
 
 const App = () => {
 
@@ -125,6 +146,8 @@ const App = () => {
     inputCardDateTo: '',
     inputCardCVC: '',
   });
+  const [formState, setFormState] = useState('form');
+  const [operation, setOperation] = useState('replenish'); //withdraw
 
   return (
     <div className="container-fluid">
@@ -152,38 +175,61 @@ const App = () => {
           </Wrapper>
         </LeftColumn>
         <RightColumn className='col-lg-6 col-md-12 d-flex align-items-center p-0'>
-          <WrapperForm className='container'>
-            <div className='row'>
-              <div className='col-lg-6 col-sm-12'>
-                <CardItemTitle>Cardholder name</CardItemTitle>
-                <CardNameInput value={inputesState.inputName} onChange={(e) => setInputesState({ ...inputesState, inputName: e.target.value })} />
-              </div>
-              <div className='col-lg-6 col-sm-12'>
-                <CardItemTitle>Cardholder surname</CardItemTitle>
-                <CardSurNameInput value={inputesState.inputSurname} onChange={(e) => setInputesState({ ...inputesState, inputSurname: e.target.value })} />
-              </div>
-              <div className='col-12 mt-4'>
-                <CardItemTitle>Card number</CardItemTitle>
-                <CardNumberInput value={inputesState.inputCardNumber} onChange={(e) => setInputesState({ ...inputesState, inputCardNumber: e.target.value })} />
-              </div>
-              <div className='col-6 mt-4 row'>
-                <CardItemTitle>EXP.DATE (MM/YY)</CardItemTitle>
-                <div className='col-6'>
-                  <CardCardDateSinceInput value={inputesState.inputCardDateSince} onChange={(e) => setInputesState({ ...inputesState, inputCardDateSince: e.target.value })} />
+          {formState == 'form' ? (
+            <WrapperForm className='container' onSubmit={(e) => {
+              e.preventDefault();
+              setFormState('success');
+            }}>
+              <div className='row'>
+                <div className='col-lg-6 col-sm-12'>
+                  <CardItemTitle>Cardholder name</CardItemTitle>
+                  <CardNameInput value={inputesState.inputName} onChange={(e) => setInputesState({ ...inputesState, inputName: e.target.value })} />
                 </div>
-                <div className='col-6'>
-                  <CardCardDateToInput value={inputesState.inputCardDateTo} onChange={(e) => setInputesState({ ...inputesState, inputCardDateTo: e.target.value })} />
+                <div className='col-lg-6 col-sm-12'>
+                  <CardItemTitle>Cardholder surname</CardItemTitle>
+                  <CardSurNameInput value={inputesState.inputSurname} onChange={(e) => setInputesState({ ...inputesState, inputSurname: e.target.value })} />
+                </div>
+                <div className='col-12 mt-4'>
+                  <CardItemTitle>Card number</CardItemTitle>
+                  <CardNumberInput value={inputesState.inputCardNumber} onChange={(e) => setInputesState({ ...inputesState, inputCardNumber: e.target.value })} />
+                </div>
+                <div className='col-6 mt-4 row'>
+                  <CardItemTitle>EXP.DATE (MM/YY)</CardItemTitle>
+                  <div className='col-6'>
+                    <CardCardDateSinceInput value={inputesState.inputCardDateSince} onChange={(e) => setInputesState({ ...inputesState, inputCardDateSince: e.target.value })} />
+                  </div>
+                  <div className='col-6'>
+                    <CardCardDateToInput value={inputesState.inputCardDateTo} onChange={(e) => setInputesState({ ...inputesState, inputCardDateTo: e.target.value })} />
+                  </div>
+                </div>
+                <div className='col-6 mt-4'>
+                  <CardItemTitle>CVC</CardItemTitle>
+                  <CardSurNameInput value={inputesState.inputCardCVC} onChange={(e) => setInputesState({ ...inputesState, inputCardCVC: e.target.value })} />
+                </div>
+                <div className='col-12 mt-5'>
+                  <Button>Confirm</Button>
                 </div>
               </div>
-              <div className='col-6 mt-4'>
-                <CardItemTitle>CVC</CardItemTitle>
-                <CardSurNameInput value={inputesState.inputCardCVC} onChange={(e) => setInputesState({ ...inputesState, inputCardCVC: e.target.value })} />
+            </WrapperForm>
+          ) : formState == 'success' ? (
+            <WrapperForm className='container text-center'>
+              <img src='images/icon-complete.svg' alt='success' />
+              <TitleThank>Thank you</TitleThank>
+              <Description>We`we added your card details</Description>
+              <Button className='mt-5' onClick={() => setFormState('fund')}>Continue</Button>
+            </WrapperForm>
+          ) : formState == 'fund' ? (
+            <WrapperForm className='container text-center'>
+              <div className='row'>
+                <div className='col-lg-6 col-sm-12'>
+                  <TitleOperation>replenish</TitleOperation>
+                </div>
+                <div className='col-lg-6 col-sm-12'>
+                  <TitleOperation>withdraw</TitleOperation>
+                </div>
               </div>
-              <div className='col-12 mt-5'>
-                <Button>Confirm</Button>
-              </div>
-            </div>
-          </WrapperForm>
+            </WrapperForm>
+          ) : ''}
         </RightColumn>
       </div>
     </div>
