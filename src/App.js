@@ -222,11 +222,16 @@ const App = () => {
             <WrapperForm className='container text-center'>
               <div className='row'>
                 <div className='col-lg-6 col-sm-12'>
-                  <TitleOperation>replenish</TitleOperation>
+                  <TitleOperation onClick={() => setOperation('widthdraw')}>replenish</TitleOperation>
                 </div>
                 <div className='col-lg-6 col-sm-12'>
-                  <TitleOperation>withdraw</TitleOperation>
+                  <TitleOperation onClick={() => setOperation('replenish')}>withdraw</TitleOperation>
                 </div>
+                {operation == 'withdraw' ? (
+                  3213
+                ) : (
+                  32312
+                )};
               </div>
             </WrapperForm>
           ) : ''}
