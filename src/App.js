@@ -63,7 +63,6 @@ const CardCVC = styled.div`
 
 const WrapperForm = styled.form`
     width: 449px;
-    border: 2px solid red;
     margin-right: 15%;
     color: black;
 `;
