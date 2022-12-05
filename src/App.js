@@ -136,6 +136,26 @@ const TitleOperation = styled.div`
   cursor: pointer;
 `;
 
+const InputMoneyReplenish = styled.input.attrs({
+  placeholder: 'Write money to replenish'
+})`
+
+`;
+const InputMoneyWithdraw = styled.input.attrs({
+  placeholder: 'Write money to withdraw'
+})`
+
+`;
+
+const MoneyValue = styled.span`
+  font-size: 22px;
+
+  & > b {
+    font-size: 30px; 
+    letter-spacing: 1px;
+  };
+`;
+
 const App = () => {
 
   const [inputesState, setInputesState] = useState({
@@ -145,9 +165,11 @@ const App = () => {
     inputCardDateSince: '',
     inputCardDateTo: '',
     inputCardCVC: '',
+    inputMoney: 0,
   });
   const [formState, setFormState] = useState('form');
-  const [operation, setOperation] = useState('replenish'); //withdraw
+  const [operation, setOperation] = useState('replenish');
+  const [moneyValue, setMoneyValue] = useState(100)
 
   return (
     <div className="container-fluid">
@@ -155,8 +177,9 @@ const App = () => {
         <LeftColumn className='col-lg-6 col-md-12 d-flex align-items-center p-0 text-white'>
           <Wrapper>
             <CardFront>
-              <div>
+              <div className='d-flex justify-content-between align-items-center'>
                 <img src='images/card-logo.svg' alt='card-logo' />
+                <MoneyValue><b>{moneyValue}</b> UAH</MoneyValue>
               </div>
               <CardNumber>{inputesState.inputCardNumber}</CardNumber>
               <CardDateDate>
@@ -222,16 +245,24 @@ const App = () => {
             <WrapperForm className='container text-center'>
               <div className='row'>
                 <div className='col-lg-6 col-sm-12'>
-                  <TitleOperation onClick={() => setOperation('widthdraw')}>replenish</TitleOperation>
+                  <TitleOperation onClick={() => setOperation('replenish')} className={`${operation == 'replenish' ? "active" : ''}`}>replenish</TitleOperation>
                 </div>
                 <div className='col-lg-6 col-sm-12'>
-                  <TitleOperation onClick={() => setOperation('replenish')}>withdraw</TitleOperation>
+                  <TitleOperation onClick={() => setOperation('withdraw')} className={`${operation == 'withdraw' ? "active" : ''}`}>withdraw</TitleOperation>
                 </div>
-                {operation == 'withdraw' ? (
-                  3213
+                {operation == 'replenish' ? (
+                  <div className='col-12 mt-4'>
+                    <InputMoneyReplenish value={formState.inputMoney} onChange={(e) => setFormState({ ...formState, inputMoney: e.current.value })} />
+                    <div>You will have: </div>
+                    <Button className='mt-3'>Submit</Button>
+                  </div>
                 ) : (
-                  32312
-                )};
+                  <div className='col-12 mt-4'>
+                    <InputMoneyWithdraw />
+                    <div>You will have: </div>
+                    <Button className='mt-3'>Submit</Button>
+                  </div>
+                )}
               </div>
             </WrapperForm>
           ) : ''}

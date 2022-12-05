@@ -28,3 +28,7 @@ input:focus {
   border: 2px solid hsl(278, 68%, 11%);
   opacity: 0.8;
 }
+
+.active {
+  border-bottom: 2px solid hsl(249, 99%, 64%);
+};
