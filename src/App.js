@@ -138,13 +138,11 @@ const TitleOperation = styled.div`
 
 const InputMoneyReplenish = styled.input.attrs({
   placeholder: 'Write money to replenish',
-  type: 'number',
 })`
 
 `;
 const InputMoneyWithdraw = styled.input.attrs({
   placeholder: 'Write money to withdraw',
-  type: 'number',
 })`
 
 `;
@@ -172,16 +170,11 @@ const App = () => {
     inputCardDateSince: '',
     inputCardDateTo: '',
     inputCardCVC: '',
-    inputMoney: 0,
+    inputMoney: '',
   });
   const [formState, setFormState] = useState('form');
   const [operation, setOperation] = useState('replenish');
   const [moneyValue, setMoneyValue] = useState(100);
-  const [moneyLeft, setMoneyLeft] = useState(moneyValue);
-
-  useEffect(() => {
-    setMoneyLeft(Number(inputesState.inputMoney) + Number(moneyLeft));
-  }, [inputesState.inputMoney]);
 
   return (
     <div className="container-fluid">
@@ -264,15 +257,23 @@ const App = () => {
                 </div>
                 {operation == 'replenish' ? (
                   <div className='col-12 mt-4'>
-                    <InputMoneyReplenish type='number' value={inputesState.inputMoney} onChange={(e) => setInputesState({ ...inputesState, inputMoney: e.target.value })} />
-                    <MoneyLeft className='text-start'>You will have: <b>{moneyLeft} </b>UAH</MoneyLeft>
-                    <Button className='mt-3'>Submit</Button>
+                    <InputMoneyReplenish value={inputesState.inputMoney} onChange={(e) => setInputesState({ ...inputesState, inputMoney: e.target.value })} />
+                    <Button className='mt-3' onClick={(e) => {
+                      e.preventDefault();
+                      setMoneyValue(Number(moneyValue) + Number(inputesState.inputMoney));
+                      setInputesState({ ...inputesState, inputMoney: '' });
+                      alert('Successfuly replenished!');
+                    }}>Submit</Button>
                   </div>
                 ) : (
                   <div className='col-12 mt-4'>
-                    <InputMoneyWithdraw type='number' />
-                    <MoneyLeft className='text-start'>You will have: <b>{100} </b>UAH</MoneyLeft>
-                    <Button className='mt-3'>Submit</Button>
+                    <InputMoneyWithdraw value={inputesState.inputMoney} onChange={(e) => setInputesState({ ...inputesState, inputMoney: e.target.value })} />
+                    <Button className='mt-3' onClick={(e) => {
+                      e.preventDefault();
+                      { Number(moneyValue) - Number(inputesState.inputMoney) < 0 ? alert('Writed value is bigger than your current count') : setMoneyValue(Number(moneyValue) - Number(inputesState.inputMoney)) }
+                      setInputesState({ ...inputesState, inputMoney: '' });
+                      alert('Successfuly withdrawed!');
+                    }}>Submit</Button>
                   </div>
                 )}
               </div>
