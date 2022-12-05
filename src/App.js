@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
@@ -137,12 +137,14 @@ const TitleOperation = styled.div`
 `;
 
 const InputMoneyReplenish = styled.input.attrs({
-  placeholder: 'Write money to replenish'
+  placeholder: 'Write money to replenish',
+  type: 'number',
 })`
 
 `;
 const InputMoneyWithdraw = styled.input.attrs({
-  placeholder: 'Write money to withdraw'
+  placeholder: 'Write money to withdraw',
+  type: 'number',
 })`
 
 `;
@@ -154,6 +156,11 @@ const MoneyValue = styled.span`
     font-size: 30px; 
     letter-spacing: 1px;
   };
+`;
+
+const MoneyLeft = styled.div`
+  font-size: 20px;
+  margin-top: 15px;
 `;
 
 const App = () => {
@@ -169,7 +176,12 @@ const App = () => {
   });
   const [formState, setFormState] = useState('form');
   const [operation, setOperation] = useState('replenish');
-  const [moneyValue, setMoneyValue] = useState(100)
+  const [moneyValue, setMoneyValue] = useState(100);
+  const [moneyLeft, setMoneyLeft] = useState(moneyValue);
+
+  useEffect(() => {
+    setMoneyLeft(Number(inputesState.inputMoney) + Number(moneyLeft));
+  }, [inputesState.inputMoney]);
 
   return (
     <div className="container-fluid">
@@ -252,14 +264,14 @@ const App = () => {
                 </div>
                 {operation == 'replenish' ? (
                   <div className='col-12 mt-4'>
-                    <InputMoneyReplenish value={formState.inputMoney} onChange={(e) => setFormState({ ...formState, inputMoney: e.current.value })} />
-                    <div>You will have: </div>
+                    <InputMoneyReplenish type='number' value={inputesState.inputMoney} onChange={(e) => setInputesState({ ...inputesState, inputMoney: e.target.value })} />
+                    <MoneyLeft className='text-start'>You will have: <b>{moneyLeft} </b>UAH</MoneyLeft>
                     <Button className='mt-3'>Submit</Button>
                   </div>
                 ) : (
                   <div className='col-12 mt-4'>
-                    <InputMoneyWithdraw />
-                    <div>You will have: </div>
+                    <InputMoneyWithdraw type='number' />
+                    <MoneyLeft className='text-start'>You will have: <b>{100} </b>UAH</MoneyLeft>
                     <Button className='mt-3'>Submit</Button>
                   </div>
                 )}
