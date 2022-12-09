@@ -232,9 +232,6 @@ const App = () => {
                 <div className='col-12 mt-4'>
                   <CardItemTitle>Card number</CardItemTitle>
                   <CardNumberInput value={inputesState.inputCardNumber} onChange={(e) => setInputesState({ ...inputesState, inputCardNumber: e.target.value })} />
-                  {!inputesState.inputCardNumber.length ? (
-                    <Error className='error'>Cannot be blank</Error>
-                  ) : ''}
                   {inputesState.inputCardNumber.length > 20 ? (
                     <Error className='error'>Cannot be more than 20</Error>
                   ) : ''}
