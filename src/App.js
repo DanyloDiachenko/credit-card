@@ -155,9 +155,8 @@ const MoneyValue = styled.span`
   };
 `;
 
-const MoneyLeft = styled.div`
-  font-size: 20px;
-  margin-top: 15px;
+const Error = styled.div`
+  color: red;
 `;
 
 const App = () => {
@@ -205,33 +204,65 @@ const App = () => {
           {formState == 'form' ? (
             <WrapperForm className='container' onSubmit={(e) => {
               e.preventDefault();
-              setFormState('success');
+              if (document.querySelector('.error')) {
+                alert('Fix all problems')
+              } else setFormState('success');
             }}>
               <div className='row'>
                 <div className='col-lg-6 col-sm-12'>
                   <CardItemTitle>Cardholder name</CardItemTitle>
                   <CardNameInput value={inputesState.inputName} onChange={(e) => setInputesState({ ...inputesState, inputName: e.target.value })} />
+                  {!inputesState.inputName.length ? (
+                    <Error className='error'>Cannot be blank</Error>
+                  ) : ''}
+                  {inputesState.inputName.length > 15 ? (
+                    <Error className='error'>Cannot be more than 15</Error>
+                  ) : ''}
                 </div>
                 <div className='col-lg-6 col-sm-12'>
                   <CardItemTitle>Cardholder surname</CardItemTitle>
                   <CardSurNameInput value={inputesState.inputSurname} onChange={(e) => setInputesState({ ...inputesState, inputSurname: e.target.value })} />
+                  {!inputesState.inputSurname.length ? (
+                    <Error className='error'>Cannot be blank</Error>
+                  ) : ''}
+                  {inputesState.inputSurname.length > 15 ? (
+                    <Error className='error'>Cannot be more than 15</Error>
+                  ) : ''}
                 </div>
                 <div className='col-12 mt-4'>
                   <CardItemTitle>Card number</CardItemTitle>
                   <CardNumberInput value={inputesState.inputCardNumber} onChange={(e) => setInputesState({ ...inputesState, inputCardNumber: e.target.value })} />
+                  {!inputesState.inputCardNumber.length ? (
+                    <Error className='error'>Cannot be blank</Error>
+                  ) : ''}
+                  {inputesState.inputCardNumber.length > 20 ? (
+                    <Error className='error'>Cannot be more than 20</Error>
+                  ) : ''}
+                  {inputesState.inputCardNumber.length < 16 ? (
+                    <Error className='error'>Cannot be less than 16</Error>
+                  ) : ''}
                 </div>
                 <div className='col-6 mt-4 row'>
                   <CardItemTitle>EXP.DATE (MM/YY)</CardItemTitle>
                   <div className='col-6'>
                     <CardCardDateSinceInput value={inputesState.inputCardDateSince} onChange={(e) => setInputesState({ ...inputesState, inputCardDateSince: e.target.value })} />
+                    {inputesState.inputCardDateSince.length !== 2 ? (
+                      <Error className='error'>Must be 2 symbols</Error>
+                    ) : ''}
                   </div>
                   <div className='col-6'>
                     <CardCardDateToInput value={inputesState.inputCardDateTo} onChange={(e) => setInputesState({ ...inputesState, inputCardDateTo: e.target.value })} />
+                    {inputesState.inputCardDateTo.length !== 2 ? (
+                      <Error className='error'>Must be 2 symbols</Error>
+                    ) : ''}
                   </div>
                 </div>
                 <div className='col-6 mt-4'>
                   <CardItemTitle>CVC</CardItemTitle>
                   <CardSurNameInput value={inputesState.inputCardCVC} onChange={(e) => setInputesState({ ...inputesState, inputCardCVC: e.target.value })} />
+                  {inputesState.inputCardCVC.length !== 3 ? (
+                    <Error className='error'>Must be 3 symbols</Error>
+                  ) : ''}
                 </div>
                 <div className='col-12 mt-5'>
                   <Button>Confirm</Button>
@@ -259,9 +290,13 @@ const App = () => {
                     <InputMoneyReplenish value={inputesState.inputMoney} onChange={(e) => setInputesState({ ...inputesState, inputMoney: e.target.value })} />
                     <Button className='mt-3' onClick={(e) => {
                       e.preventDefault();
-                      setMoneyValue(Number(moneyValue) + Number(inputesState.inputMoney));
-                      setInputesState({ ...inputesState, inputMoney: '' });
-                      alert('Successfuly replenished!');
+                      if (inputesState.inputMoney.length < 1 || inputesState.inputMoney.length > 5) {
+                        alert('Can not be more than 5 symbols and less than 1');
+                      } else {
+                        setMoneyValue(Number(moneyValue) + Number(inputesState.inputMoney));
+                        setInputesState({ ...inputesState, inputMoney: '' });
+                        alert('Successfuly replenished!');
+                      }
                     }}>Submit</Button>
                   </div>
                 ) : (
@@ -269,9 +304,12 @@ const App = () => {
                     <InputMoneyWithdraw value={inputesState.inputMoney} onChange={(e) => setInputesState({ ...inputesState, inputMoney: e.target.value })} />
                     <Button className='mt-3' onClick={(e) => {
                       e.preventDefault();
-                      { Number(moneyValue) - Number(inputesState.inputMoney) < 0 ? alert('Writed value is bigger than your current count') : setMoneyValue(Number(moneyValue) - Number(inputesState.inputMoney)) }
-                      setInputesState({ ...inputesState, inputMoney: '' });
-                      alert('Successfuly withdrawed!');
+                      if (Number(moneyValue) - Number(inputesState.inputMoney) < 0) {
+                        alert('Writed value is bigger than your current count')
+                      } else {
+                        setMoneyValue(Number(moneyValue) - Number(inputesState.inputMoney));
+                        alert('Successfuly withdrawed!');
+                      }
                     }}>Submit</Button>
                   </div>
                 )}
@@ -280,7 +318,7 @@ const App = () => {
           ) : ''}
         </RightColumn>
       </div>
-    </div>
+    </div >
   );
 }
 
