@@ -296,7 +296,7 @@ const App = () => {
                         setMoneyValue(Number(moneyValue) + Number(inputesState.inputMoney));
                         setInputesState({ ...inputesState, inputMoney: '' });
                         alert('Successfuly replenished!');
-                      }
+                      };
                     }}>Submit</Button>
                   </div>
                 ) : (
@@ -305,11 +305,11 @@ const App = () => {
                     <Button className='mt-3' onClick={(e) => {
                       e.preventDefault();
                       if (Number(moneyValue) - Number(inputesState.inputMoney) < 0) {
-                        alert('Writed value is bigger than your current count')
+                        alert('Writed value is bigger than your current count');
                       } else {
                         setMoneyValue(Number(moneyValue) - Number(inputesState.inputMoney));
                         alert('Successfuly withdrawed!');
-                      }
+                      };
                     }}>Submit</Button>
                   </div>
                 )}
